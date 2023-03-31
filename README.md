@@ -148,7 +148,7 @@ For the final instance we can see how the model struggles with facial expression
  # Conclusions
  
  Overall the model works well for detecting smiles, although for a more practical implementation the haarcascade would likely need some more tweaking, or implementing a requirement for a face appearing for multiple frames/a smile appearing for consecutive frames. 
- The best model seems to perform well compared to other examples from  [3], being closest in performance-terms to the best scoring model. 
+ The best model seems to perform well compared to other examples from  [3], being closest in performance-terms to the best scoring model, with a score of 95% accuracy.
  
 
 ### Sources 
