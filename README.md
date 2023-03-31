@@ -12,8 +12,8 @@ The 4000 images are all of different sizes, some with the face further away in t
  
  A cascade, simply put, is a type of ensemble, giving the output of a classifier to the next. By using this we can find faces at different scale, without resorting to using more complicated methods .
  
- The images are spilt into a train,val,test split. 77% of the data is for training and the rest is further split into two to give us the test and validation sets.
-The images in the sets are then processed using the haarcascade, then cropped to either (64,64) or (120,120) pixels. The training data also includes the original images, and two croppings of (width,height) and (height,width) in order to augment the data somewhat. 
+The images are spilt into a train,val,test split. 70% of the data is for training, and the rest is further split into two to give us the test and validation sets.
+The images in the training set are then processed using the haarcascade, then cropped to either (64,64) pixels. The training data also includes the original images, and the cropping of (height,width) in order to augment the data somewhat. 
 
 Below is an example of the original image and the cropped version, using the haarcascade
 
@@ -126,9 +126,11 @@ We can see from the above table that even with an extreme split of only 10% of t
 
  # How does the model perform in practice? 
  
+ (you can find the animated gifs of these still images in the "/images" part of this repository )
+ 
  Using the code "real-time-smile-detection.py" we can take an input from a webcam or gif to test the model in a more practical context. 
 
-In the below case we can see that while detecting the smile well, the  haarcascade will occasionally detect a false positive face in the distance. THis could assumably be done away with by requiring that a face dictation must appear in the same region for more than one frame consecutivly 
+In the below case we can see that while detecting the smile well, the  haarcascade will occasionally detect a false positive face in the distance. This could assumably be done away with by requiring that a face dictation must appear in the same region for more than one frame consecutively 
 
 ![image](https://user-images.githubusercontent.com/60330103/229241975-27cd7480-ef5a-46cc-ad92-a70e29ecd203.png)
 
