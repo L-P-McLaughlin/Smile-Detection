@@ -15,12 +15,31 @@ The 4000 images are all of different sizes, some with the face further away in t
  The images are spilt into a train,val,test split. 77% of the data is for training and the rest is further split into two to give us the test and validation sets.
 The images in the sets are then processed using the haarcascade, then cropped to either (64,64) or (120,120) pixels. The training data also includes the original images, and two croppings of (width,height) and (height,width) in order to augment the data somewhat. 
 
+Below is an example of the original image and the cropped version, using the haarcascade
+
+![image](https://user-images.githubusercontent.com/60330103/229243298-e57454be-5931-428a-b8f0-9965ff8a3e10.png)
+
  
  
  # Augmenting the data
  
  One way we can boost the performance of our model, is by augmenting the data, that is taking the training data we have and getting more samples from it. We have one easy way of doing this, which is taking the face-cropped image and flipping it, creating more data to use in training. To improve upon this, we can take a cropped image, rotate it randomly between 20 and 40 degrees in both the clockwise and anticlockwise directions, or pad the image to simulate the face being further away. To further this we can take the haartransform output and apply padding and cropping, rotation, and both together, on both the flipped and original, as a way of augmenting the data. Performing this results in almost 3x the amount of data, and as we can see later, gives a noticeable boost to the performance
  
+ below we can see an example of the augementation
+ 
+ firstly mirroring the cropped image:
+ 
+ ![image](https://user-images.githubusercontent.com/60330103/229243406-b234f6d5-f3d6-4d76-b7a4-637ae2238d49.png)
+
+then taking an image and rotating, padding and cropping, then both. First the original
+
+ ![image](https://user-images.githubusercontent.com/60330103/229243212-5f47435e-0f1d-474f-99f9-5d0b809cdbd9.png) 
+ 
+ Then the augmented samples. 
+
+ ![image](https://user-images.githubusercontent.com/60330103/229243116-c603850a-d961-407c-9279-f79be166429a.png) 
+ 
+  
  
  # training a CNN to detect a smile 
  
@@ -106,15 +125,19 @@ We can see from the above table that even with an extreme split of only 10% of t
 
 
  # How does the model perform in practice? 
+ 
  Using the code "real-time-smile-detection.py" we can take an input from a webcam or gif to test the model in a more practical context. 
 
 In the below case we can see that while detecting the smile well, the  haarcascade will occasionally detect a false positive face in the distance. THis could assumably be done away with by requiring that a face dictation must appear in the same region for more than one frame consecutivly 
+
 ![image](https://user-images.githubusercontent.com/60330103/229241975-27cd7480-ef5a-46cc-ad92-a70e29ecd203.png)
 
 In this example we can see that the smile-classifier performs well for the most part, but the haarcascade struggles with detecting a face if there is a hand in-front. The smile detection error could again be mitigated by implementing a consecutive smile classification requirement
+
 ![image](https://user-images.githubusercontent.com/60330103/229242260-a7c7a5d9-79f8-430c-85ed-2d50010ca6e0.png)
 
 For the below example the model performs well, excluding a brief false positive in the background
+
 ![image](https://user-images.githubusercontent.com/60330103/229242509-6a64697c-1fe0-4283-8f1c-cd9f05fc033e.png)
 
 For the final instance we can see how the model struggles with facial expressions close to a smile, and a face that is not facing the camera directly, these issues as-side, the model seems to perform acceptably 
@@ -123,6 +146,8 @@ For the final instance we can see how the model struggles with facial expression
  # Conclusions
  
  Overall the model works well for detecting smiles, although for a more practical implementation the haarcascade would likely need some more tweaking, or implementing a requirement for a face appearing for multiple frames/a smile appearing for consecutive frames. 
+ The best model seems to perform well compared to other examples from  [3], being closest in performance-terms to the best scoring model. 
+ 
 
 ### Sources 
 [1] https://inc.ucsd.edu/mplab/398/
