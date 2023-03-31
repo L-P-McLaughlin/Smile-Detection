@@ -19,10 +19,12 @@ The images in the sets are then processed using the haarcascade, then cropped to
  
  # Augmenting the data
  
+ One way we can boost the performance of our model, is by augmenting the data, that is taking the training data we have and getting more samples from it. We have one easy way of doing this, which is taking the face-cropped image and flipping it, creating more data to use in training. To improve upon this, we can take a cropped image, rotate it randomly between 20 and 40 degrees in both the clockwise and anticlockwise directions, or pad the image to simulate the face being further away. To further this we can take the haartransform output and apply padding and cropping, rotation, and both together, on both the flipped and original, as a way of augmenting the data. Performing this results in almost 3x the amount of data, and as we can see later, gives a noticeable boost to the performance
+ 
  
  # training a CNN to detect a smile 
  
- Looking at [3] we can see that using covolution filters of 12,28,64 seemed to have some success, so we can implement this and add batch normalization and a dropout layer after each convolution and max-pooling, in order to prevent the model from over fitting, and to increase the performance. The convolutional layers are then fed into 2 dense layers and finally a softmax layer. We can see the model architecture in more detail below.
+ Looking at [3] we can see that using convolution filters of 12,28,64 seemed to have some success, so we can implement this and add batch normalisation and a dropout layer after each convolution and max-pooling, in order to prevent the model from over fitting, and to increase the performance. The convolutional layers are then fed into 2 dense layers and finally a softmax layer. We can see the model architecture in more detail below.
  ```
  _________________________________________________________________
  Layer (type)                Output Shape              Param #   
@@ -104,7 +106,18 @@ We can see from the above table that even with an extreme split of only 10% of t
 
 
  # How does the model perform in practice? 
- 
+ Using the code "real-time-smile-detection.py" we can take an input from a webcam or gif to test the model in a more practical context. 
+
+In the below case we can see that while detecting the smile well, the  haarcascade will occasionally detect a false positive face in the distance. THis could assumably be done away with by requiring that a face dictation must appear in the same region for more than one frame consecutivly 
+![image](https://user-images.githubusercontent.com/60330103/229241975-27cd7480-ef5a-46cc-ad92-a70e29ecd203.png)
+
+In this example we can see that the smile-classifier performs well for the most part, but the haarcascade struggles with detecting a face if there is a hand in-front. The smile detection error could again be mitigated by implementing a consecutive smile classification requirement
+![image](https://user-images.githubusercontent.com/60330103/229242260-a7c7a5d9-79f8-430c-85ed-2d50010ca6e0.png)
+
+For the below example the model performs well, excluding a brief false positive in the background
+![image](https://user-images.githubusercontent.com/60330103/229242509-6a64697c-1fe0-4283-8f1c-cd9f05fc033e.png)
+
+For the final instance we can see how the model struggles with facial expressions close to a smile, and a face that is not facing the camera directly, these issues as-side, the model seems to perform acceptably 
 
 
  # Conclusions
