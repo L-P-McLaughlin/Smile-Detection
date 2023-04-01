@@ -99,7 +99,7 @@ Trainable params: 2,740,360
 Non-trainable params: 218
  ```
 
-The model was only trained with an input of (64,64,1), i.e. downsampled and in greyscale, so it is possible that the model can perform better with some tweaks and with a higher resolution image. To begin with the model is trained only using the possible output of the haarcascade, which achieved a accuracy of 92.3% on the test set. In order to improve this we can attempt to augment the dataset. The results below were achieved using 70% of the 4000 samples for training (with possible augmentation), and the remaining 30% are split 50% between test and validation data. 
+The model was only trained with an input of (64,64,1), i.e. downsampled and in greyscale, so it is possible that the model can perform better with some tweaks and with a higher resolution image. To begin with the model is trained only using the possible output of the haarcascade, which achieved a accuracy of 92.3% on the test set. In order to improve this we can attempt to augment the dataset, which then acheives a 95% accuracy on the test set. The results below were achieved using 70% of the 4000 samples for training (with possible augmentation), and the remaining 30% are split 50% between test and validation data. 
 
 
  
